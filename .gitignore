@@ -1,0 +1,104 @@
+# ========================================
+# 上海宇羲伏天智能科技有限公司出品
+# 文件级注释：Git 忽略配置文件，用于排除本地数据目录、敏感配置和临时文件
+# ========================================
+
+# ========================================
+# Python 后端相关
+# ========================================
+
+# 虚拟环境
+.venv/
+venv/
+env/
+ENV/
+
+# Python 缓存
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.so
+
+# 测试和覆盖率
+.pytest_cache/
+htmlcov/
+.coverage
+.coverage.*
+.tox/
+
+# 数据目录（重要！本地数据不应提交）
+code/data/
+code/data/chroma_db/
+code/data/files/
+code/data/*.db
+code/data/*.sqlite
+
+# 模型文件目录（大型文件，不应提交）
+code/models/
+code/models/bge-*/
+code/models/cache/
+
+# 环境配置文件（敏感信息，不应提交）
+code/.env
+code/.env.*
+!code/env.example
+
+# ========================================
+# Node.js 前端相关
+# ========================================
+
+# 依赖
+node_modules/
+
+# 构建输出
+frontend/dist/
+frontend/dist-ssr/
+
+# 日志
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# 本地配置
+*.local
+
+# ========================================
+# 编辑器和系统文件
+# ========================================
+
+# VSCode
+.vscode/*
+!.vscode/extensions.json
+
+# IntelliJ IDEA
+.idea/
+
+# 系统文件
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# ========================================
+# 其他
+# ========================================
+
+# 本地脚本目录
+script/basic-docker/
+
+# 备份文件
+*.bak
+*.backup
+
+# 临时文件
+*.tmp
+
+# AI 工具相关（本地配置，不应提交）
+.claude/
+.cursor/
+.shared/

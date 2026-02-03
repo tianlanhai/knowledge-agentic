@@ -1,0 +1,611 @@
+/**
+ * 上海宇羲伏天智能科技有限公司出品
+ * 文件级注释：KnowledgeManagement 组件样式
+ */
+
+/**
+ * 文件级注释：KnowledgeManagement 组件样式
+ * 内部逻辑：设置容器高度和滚动行为，解决内容溢出显示问题
+ * 使用 CSS 变量，支持主题切换
+ * 增强视觉效果 - 玻璃拟态、渐变边框、光晕效果
+ */
+
+/* ==================== 容器 ==================== */
+
+/**
+ * 知识管理容器样式
+ * 文件级注释：主容器，占满父容器高度，内容溢出时启用垂直滚动
+ * 内部变量：使用 CSS 变量控制间距
+ * 内部逻辑：height: 100% 占满父容器，overflow-y: auto 处理溢出滚动
+ */
+.km-container {
+  /**
+   * 修复：设置高度为 100%，占满父容器 .app-content 的高度
+   * 问题：未设置高度导致容器无法正确约束子元素
+   * 解决：配合 overflow-y: auto 实现正确的滚动行为
+   */
+  height: 100%;
+
+  /**
+   * 修复：内容超出可视区域时启用垂直滚动
+   * 问题：父容器 .app-content 设置了 overflow: hidden
+   * 解决：在本层启用滚动，确保内容可访问
+   */
+  overflow-y: auto;
+
+  /**
+   * 添加平滑滚动效果，提升用户体验
+   */
+  scroll-behavior: smooth;
+
+  /**
+   * Flex 布局，纵向排列子元素
+   */
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+
+  /**
+   * 入场动画
+   */
+  animation: slideInUp var(--transition-slow) var(--ease-smooth);
+
+  /**
+   * 内边距，保持内容与边缘的间距
+   */
+  padding: var(--spacing-lg);
+}
+
+/* ==================== 卡片 ==================== */
+
+.km-card {
+  padding: var(--spacing-lg);
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  transition: all var(--transition-base);
+  position: relative;
+  overflow: hidden;
+}
+
+.km-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-lg);
+  padding: 1px;
+  background: var(--color-gradient);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.km-card:hover {
+  border-color: var(--glass-border-hover);
+  box-shadow: var(--glow-primary), var(--glass-shadow);
+  transform: translateY(-4px);
+}
+
+.km-card:hover::before {
+  opacity: 1;
+}
+
+/* ==================== 卡片头部 ==================== */
+
+.km-card-header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+  position: relative;
+  z-index: 1;
+}
+
+.km-card-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: var(--color-gradient);
+  border-radius: var(--radius-md);
+  color: #ffffff;
+  font-size: var(--font-size-lg);
+  box-shadow: var(--glow-primary);
+  transition: all var(--transition-base);
+}
+
+.km-card-icon:hover {
+  box-shadow: var(--glow-primary-strong);
+  transform: scale(1.1) rotate(5deg);
+}
+
+.km-card-title h3 {
+  margin: 0;
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  background: var(--color-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.km-card-title p {
+  margin: var(--spacing-xs) 0 0;
+  font-size: var(--font-size-sm);
+  color: var(--text-tertiary);
+}
+
+/* ==================== 表单 ==================== */
+
+.km-form-group {
+  margin-bottom: var(--spacing-lg);
+  position: relative;
+  z-index: 1;
+}
+
+.km-form-label {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.km-form-label svg {
+  color: var(--color-primary-500);
+  transition: all var(--transition-base);
+}
+
+.km-form-label:hover svg {
+  transform: scale(1.1);
+  color: var(--color-primary-600);
+}
+
+/* ==================== 输入框 ==================== */
+
+.km-input {
+  border-radius: var(--radius-md);
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border-color: var(--glass-border);
+  transition: all var(--transition-base);
+}
+
+.km-input:hover {
+  border-color: var(--glass-border-hover);
+}
+
+.km-input:focus {
+  border-color: var(--color-primary-500);
+  box-shadow: var(--glow-inner-primary), 0 0 0 3px rgba(102, 126, 234, 0.2);
+  transform: translateY(-1px);
+}
+
+/* ==================== 标签 ==================== */
+
+.km-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: var(--color-gradient);
+  color: white;
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  transition: all var(--transition-base);
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.km-tag::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.3) 50%, transparent 100%);
+  transform: translateX(-100%) rotate(45deg);
+  transition: transform 0.6s var(--ease-sharp);
+}
+
+.km-tag:hover::after {
+  transform: translateX(100%) rotate(45deg);
+}
+
+.km-tag:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(102, 126, 234, 0.3);
+}
+
+.km-tag-icon {
+  font-size: var(--font-size-xs);
+}
+
+.km-tag-label {
+  font-size: var(--font-size-sm);
+}
+
+.km-tag-close {
+  margin-left: 6px;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: all var(--transition-fast);
+  padding: 0;
+  line-height: 1;
+  position: relative;
+  z-index: 1;
+}
+
+.km-tag-close:hover {
+  opacity: 1;
+  transform: scale(1.2) rotate(90deg);
+}
+
+.km-tag-input-group {
+  display: flex;
+  gap: var(--spacing-sm);
+}
+
+.km-tag-input {
+  flex: 1;
+}
+
+.km-tag-add-btn {
+  height: 40px;
+  border-radius: var(--radius-md);
+  background: var(--glass-bg);
+  border-color: var(--glass-border);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+}
+
+.km-tag-add-btn:hover {
+  border-color: var(--color-primary-500);
+  box-shadow: var(--glow-primary);
+}
+
+.km-tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: var(--spacing-md);
+}
+
+/* ==================== 上传区域 ==================== */
+
+.km-uploader {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 2px dashed var(--glass-border);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-lg);
+  transition: all var(--transition-base);
+  position: relative;
+  overflow: hidden;
+  min-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.km-uploader::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gradient-primary-subtle);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.km-uploader-active {
+  border-color: var(--color-primary-500);
+  border-style: solid;
+  box-shadow: var(--glow-primary);
+  background: var(--glass-bg-hover);
+  transform: scale(1.02);
+}
+
+.km-uploader-active::before {
+  opacity: 1;
+}
+
+.km-uploader-content {
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.km-uploader-icon {
+  font-size: 48px;
+  color: var(--color-primary-500);
+  margin-bottom: var(--spacing-md);
+  transition: all var(--transition-base);
+}
+
+.km-uploader:hover .km-uploader-icon {
+  transform: scale(1.1);
+  color: var(--color-primary-600);
+}
+
+.km-uploader-text {
+  font-size: var(--font-size-md);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: var(--spacing-sm) 0;
+  background: var(--color-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.km-uploader-hint {
+  font-size: var(--font-size-sm);
+  color: var(--text-tertiary);
+}
+
+/* ==================== 进度条 ==================== */
+
+.km-progress {
+  margin-top: var(--spacing-lg);
+  position: relative;
+  z-index: 1;
+}
+
+.km-progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--spacing-sm);
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+.km-progress-bar {
+  height: 6px;
+  background: var(--bg-hover);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+  position: relative;
+}
+
+.km-progress-fill {
+  height: 100%;
+  background: var(--color-gradient);
+  transition: width var(--transition-fast);
+  position: relative;
+  overflow: hidden;
+}
+
+.km-progress-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  animation: progressShine 2s infinite;
+}
+
+@keyframes progressShine {
+  0% { left: -100%; }
+  100% { left: 100%; }
+}
+
+/* ==================== 按钮样式 ==================== */
+
+.km-submit-btn {
+  height: 40px;
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-md);
+  font-weight: 600;
+  background: var(--color-gradient);
+  box-shadow: var(--glow-primary);
+  transition: all var(--transition-base);
+  position: relative;
+  overflow: hidden;
+}
+
+.km-submit-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 100%);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.km-submit-btn:hover::before {
+  opacity: 1;
+}
+
+.km-submit-btn:hover {
+  box-shadow: var(--glow-primary-strong);
+  transform: translateY(-2px);
+  background: var(--color-gradient-hover);
+}
+
+/* ==================== 网格布局 ==================== */
+
+.km-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+  gap: 24px;
+  animation: slideInUp var(--transition-slow) var(--ease-smooth);
+}
+
+/* ==================== 导航卡片 ==================== */
+
+.km-navigation-card {
+  margin-top: 24px;
+  animation: slideInUp var(--transition-slow) var(--ease-smooth);
+  animation-delay: 0.2s;
+  animation-fill-mode: both;
+}
+
+.km-navigation-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+.km-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 24px;
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--glass-border);
+  transition: all var(--transition-base);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.km-nav-item::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gradient-primary-subtle);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.km-nav-item:hover {
+  border-color: var(--color-primary-500);
+  box-shadow: var(--glow-primary);
+  transform: translateY(-4px) scale(1.02);
+}
+
+.km-nav-item:hover::before {
+  opacity: 1;
+}
+
+.km-nav-icon {
+  font-size: 32px;
+  color: #ffffff;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-gradient);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-base);
+  position: relative;
+  z-index: 1;
+}
+
+.km-nav-item:hover .km-nav-icon {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: var(--glow-primary-strong);
+}
+
+.km-nav-text h3 {
+  margin: 0 0 4px 0;
+  font-size: 16px;
+  font-weight: 600;
+  background: var(--color-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  position: relative;
+  z-index: 1;
+}
+
+.km-nav-text p {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text-secondary);
+  position: relative;
+  z-index: 1;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .km-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .km-navigation-content {
+    grid-template-columns: 1fr;
+  }
+
+  .km-nav-item {
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
+  }
+
+  .km-card {
+    padding: var(--spacing-md);
+  }
+}
+
+@media (max-width: 480px) {
+  .km-nav-item {
+    padding: var(--spacing-md);
+  }
+
+  .km-uploader {
+    padding: var(--spacing-lg);
+  }
+}
+
+/* ==================== 文档列表样式 ==================== */
+
+/**
+ * 文档名容器
+ * 内部逻辑：flex 布局，图标和文字横向排列，宽度自适应
+ */
+.doc-name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  min-width: 0;  /* 允许 flex 子元素正确截断 */
+}
+
+/**
+ * 文档名图标
+ */
+.doc-name-icon {
+  color: #3b82f6;
+  font-size: 16px;
+  flex-shrink: 0;  /* 防止图标被压缩 */
+}
+
+/**
+ * 文档名文本
+ * 内部逻辑：允许截断显示，使用 CSS 变量适配深色/浅色主题
+ */
+.doc-name-text {
+  font-weight: 500;
+  color: var(--text-primary);  /* 使用 CSS 变量适配主题 */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;  /* 填充剩余空间 */
+  min-width: 150px;
+}

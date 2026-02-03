@@ -1,0 +1,117 @@
+/**
+ * 上海宇羲伏天智能科技有限公司出品
+ * 文件级注释：模型配置页面样式
+ */
+
+/**
+ * 文件级注释：模型配置页面样式
+ * 内部逻辑：设置页面容器高度和滚动行为，解决内容溢出显示问题
+ * 使用 CSS 变量，支持主题切换
+ */
+
+/**
+ * 模型配置页面容器样式
+ * 文件级注释：主容器，占满父容器高度，内容溢出时启用垂直滚动
+ * 内部变量：使用固定内边距和最大宽度约束
+ * 内部逻辑：height: 100% 占满父容器，overflow-y: auto 处理溢出滚动
+ */
+.model-config-page {
+  /**
+   * 修复：设置高度为 100%，占满父容器 .app-content 的高度
+   * 问题：未设置高度导致容器无法正确约束子元素
+   * 解决：配合 overflow-y: auto 实现正确的滚动行为
+   */
+  height: 100%;
+
+  /**
+   * 修复：内容超出可视区域时启用垂直滚动
+   * 问题：父容器 .app-content 设置了 overflow: hidden
+   * 解决：在本层启用滚动，确保内容可访问
+   */
+  overflow-y: auto;
+
+  /**
+   * 添加平滑滚动效果，提升用户体验
+   */
+  scroll-behavior: smooth;
+
+  /**
+   * 内边距，保持内容与边缘的间距
+   */
+  padding: 24px;
+}
+
+/**
+ * 模型配置页面标题样式
+ * 内部逻辑：使用渐变色文字效果，增强视觉吸引力
+ */
+.model-config-page h1 {
+  margin-bottom: 16px;
+  background: var(--color-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/**
+ * 配置表格样式
+ * 内部逻辑：使用 CSS 变量适配深色/浅色主题
+ */
+.model-config-page .ant-table {
+  background: var(--glass-bg);
+}
+
+/**
+ * 函数级注释：表格横向滚动支持
+ * 内部逻辑：当内容宽度超过容器时，启用横向滚动
+ */
+.model-config-page .ant-table-container {
+  overflow-x: auto;
+}
+
+/**
+ * 函数级注释：表格固定操作列
+ * 内部逻辑：确保操作列在滚动时始终可见
+ */
+.model-config-page .ant-table-body {
+  overflow-x: auto;
+}
+
+/**
+ * 函数级注释：操作列按钮样式优化
+ * 内部逻辑：确保按钮在小屏幕下也能正常显示
+ */
+.model-config-page .ant-btn-sm {
+  white-space: nowrap;
+}
+
+/**
+ * Ollama 管理面板卡片样式
+ * 内部逻辑：使用 CSS 变量适配深色/浅色主题
+ */
+.model-config-page .ant-card {
+  box-shadow: var(--shadow-sm);
+}
+
+.model-config-page .ant-card-head {
+  border-bottom: 1px solid var(--border-base);
+}
+
+.model-config-page .ant-card-body {
+  padding: 16px;
+}
+
+/**
+ * 空状态样式
+ * 内部逻辑：使用 CSS 变量适配深色/浅色主题
+ */
+.model-config-page p[style*="color: #999"] {
+  text-align: center;
+  padding: 24px;
+  color: var(--text-tertiary) !important;
+}
+
+/* Tag样式优化 */
+.model-config-page .ant-tag {
+  margin: 2px;
+}

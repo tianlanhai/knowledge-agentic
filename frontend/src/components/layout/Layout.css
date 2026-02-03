@@ -1,0 +1,170 @@
+/**
+ * 上海宇羲伏天智能科技有限公司出品
+ * 文件级注释：Layout 组件样式，使用 CSS 变量，支持主题切换，应用玻璃拟态效果
+ */
+
+/**
+ * Layout 组件样式
+ * 使用 CSS 变量，支持主题切换
+ * 应用玻璃拟态 (Glassmorphism) 效果
+ */
+
+/* ==================== 应用布局 ==================== */
+
+/**
+ * 应用主布局容器样式
+ * 文件级注释：将应用固定在视口高度内，防止整体滚动
+ * 内部变量：使用 CSS 变量控制背景和渐变效果
+ * 内部逻辑：固定高度 + overflow hidden 确保只有内容区域滚动
+ */
+.app-layout {
+  /**
+   * 修复：改为固定高度而非最小高度
+   * 问题：min-height 允许内容超出时扩展，导致页面整体滚动
+   * 解决：固定视口高度并隐藏溢出，确保只有聊天消息区域可滚动
+   */
+  height: 100vh;
+  overflow: hidden;
+  background: var(--bg-base);
+  background-image:
+    radial-gradient(circle at 20% 30%, rgba(102, 126, 234, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 70%, rgba(118, 75, 162, 0.08) 0%, transparent 50%);
+}
+
+/* ==================== 侧边栏 (玻璃拟态) ==================== */
+
+.app-sider {
+  background: var(--sidebar-bg) !important;
+  border-right: 1px solid var(--sidebar-border) !important;
+  backdrop-filter: blur(var(--sidebar-blur)) !important;
+  -webkit-backdrop-filter: blur(var(--sidebar-blur)) !important;
+  box-shadow: var(--glass-shadow);
+}
+
+/* 覆盖 Ant Design Sider 默认样式 */
+.app-sider .ant-layout-sider-children {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+/* ==================== 主布局 ==================== */
+
+/**
+ * 主内容区域布局样式
+ * 文件级注释：主内容区固定高度，配合 flex 布局实现自适应
+ * 内部变量：使用 flex 布局实现 Header 和 Content 的垂直排列
+ * 内部逻辑：固定高度 + overflow hidden 防止整体滚动
+ */
+.app-main-layout {
+  display: flex;
+  flex-direction: column;
+  /**
+   * 修复：改为固定高度而非最小高度
+   * 问题：min-height 导致内容超出时整个页面滚动，侧边栏消失
+   * 解决：固定视口高度并隐藏溢出，配合 Content 区域的 overflow: hidden
+   */
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ==================== 内容区 ==================== */
+
+/**
+ * 内容区域样式
+ * 文件级注释：内容区使用 flex 自适应，将滚动控制权交给子组件
+ * 内部变量：使用 CSS 变量控制内边距和背景色
+ * 内部逻辑：flex: 1 占据剩余空间，min-height: 0 允许 flex 子元素正确收缩
+ */
+.app-content {
+  flex: 1;
+  padding: var(--spacing-lg);
+  background-color: transparent;
+  /**
+   * 修复：防止自身滚动，让子组件（如 Chat 的 .chat-messages）自行处理滚动
+   */
+  overflow: hidden;
+  /**
+   * 关键修复：设置 min-height: 0
+   * 问题：flex 容器默认 min-height: auto，会阻止子元素收缩到内容高度以下
+   * 解决：min-height: 0 允许 flex 子元素正确收缩并启用内部滚动
+   * 参考：https://web.dev/maxing-out-height/
+   */
+  min-height: 0;
+}
+
+/* ==================== Bento Grid 布局 ==================== */
+
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--bento-grid-columns), 1fr);
+  gap: var(--bento-grid-gap);
+  padding: var(--bento-grid-padding);
+}
+
+.bento-item {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--card-shadow);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  transition: all var(--transition-base);
+  overflow: hidden;
+}
+
+.bento-item:hover {
+  border-color: var(--card-hover-border);
+  box-shadow: var(--shadow-glow);
+  transform: translateY(-2px);
+}
+
+/* Bento Grid 尺寸变体 */
+.bento-item-span-1 { grid-column: var(--bento-cell-span-1); }
+.bento-item-span-2 { grid-column: var(--bento-cell-span-2); }
+.bento-item-span-3 { grid-column: var(--bento-cell-span-3); }
+.bento-item-span-4 { grid-column: var(--bento-cell-span-4); }
+.bento-item-span-6 { grid-column: var(--bento-cell-span-6); }
+.bento-item-span-8 { grid-column: var(--bento-cell-span-8); }
+.bento-item-span-12 { grid-column: var(--bento-cell-span-12); }
+
+.bento-item-row-1 { grid-row: span 1; }
+.bento-item-row-2 { grid-row: span 2; }
+.bento-item-row-3 { grid-row: span 3; }
+
+/* ==================== 响应式设计 ==================== */
+
+@media (max-width: 768px) {
+  .app-content {
+    padding: var(--spacing-md);
+  }
+
+  .bento-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-md);
+    padding: var(--spacing-md);
+  }
+
+  .bento-item-span-1,
+  .bento-item-span-2,
+  .bento-item-span-3,
+  .bento-item-span-4,
+  .bento-item-span-6,
+  .bento-item-span-8,
+  .bento-item-span-12 {
+    grid-column: 1;
+  }
+}
+
+/* ==================== 平板响应式 ==================== */
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  .bento-grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  .bento-item-span-8,
+  .bento-item-span-12 {
+    grid-column: span 6;
+  }
+}

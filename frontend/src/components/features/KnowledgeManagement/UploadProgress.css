@@ -1,0 +1,55 @@
+/**
+ * 上海宇羲伏天智能科技有限公司出品
+ * 文件级注释：上传进度组件样式
+ */
+
+/**
+ * 文件级注释：上传进度组件样式
+ * 内部逻辑：定义进度显示组件的样式
+ */
+
+.upload-progress-card {
+  margin-bottom: 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.upload-progress-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.upload-progress-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.upload-progress-filename {
+  font-weight: 500;
+  color: #262626;
+}
+
+.upload-progress-close {
+  color: #8c8c8c;
+  transition: color 0.3s;
+}
+
+.upload-progress-close:hover {
+  color: #262626;
+}
+
+.upload-progress-body {
+  padding: 16px 0;
+}
+
+.upload-progress-pending {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #8c8c8c;
+  font-size: 14px;
+}

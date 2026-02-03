@@ -1,0 +1,259 @@
+/**
+ * 上海宇羲伏天智能科技有限公司出品
+ * 文件级注释：GlassCard 组件样式 - 玻璃拟态效果、渐变边框、光泽动画、光晕效果
+ */
+
+/**
+ * GlassCard 组件样式
+ * 玻璃拟态效果、渐变边框、光泽动画、光晕效果
+ */
+
+/* ==================== 玻璃拟态卡片基础 ==================== */
+
+.glass-card {
+  position: relative;
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--card-radius);
+  padding: var(--card-padding);
+  box-shadow: var(--glass-shadow);
+  transition: all var(--transition-base);
+}
+
+/* ==================== 渐变边框效果 ==================== */
+
+.glass-card-gradient {
+  border-color: transparent;
+  position: relative;
+  overflow: visible;
+}
+
+.glass-card-gradient::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: var(--card-radius);
+  padding: 1px;
+  background: var(--color-gradient);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  pointer-events: none;
+  transition: opacity var(--transition-base);
+}
+
+.glass-card:hover .glass-card-gradient::before {
+  opacity: 1;
+}
+
+/* ==================== 悬停提升效果 ==================== */
+
+.glass-card-lift {
+  cursor: pointer;
+}
+
+.glass-card-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--glow-primary), var(--glass-shadow);
+}
+
+.glass-card-lift:active {
+  transform: translateY(-2px);
+}
+
+/* ==================== 无动画类 ==================== */
+
+.glass-card-no-animation * {
+  animation: none !important;
+  transition: none !important;
+}
+
+/* ==================== 光泽动画效果 ==================== */
+
+.glass-card-shimmer {
+  position: absolute;
+  inset: 0;
+  width: 200%;
+  height: 200%;
+  background: var(--shine-gradient);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+  animation: shimmerMove 3s infinite;
+}
+
+.glass-card:hover .glass-card-shimmer {
+  opacity: 1;
+}
+
+@keyframes shimmerMove {
+  0% {
+    transform: translate(var(--shimmer-left), var(--shimmer-top));
+  }
+  100% {
+    transform: translate(calc(var(--shimmer-left) + 50%), var(--shimmer-top));
+  }
+}
+
+/* ==================== 内容区域 ==================== */
+
+.glass-card-content {
+  position: relative;
+  z-index: 1;
+  transition: all var(--transition-base);
+}
+
+/* ==================== 渐变边框层 ==================== */
+
+.glass-card-gradient-border {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--card-radius);
+  pointer-events: none;
+}
+
+/* ==================== 圆角变体 ==================== */
+
+.glass-card[class*='rounded-sm'] {
+  --card-radius: var(--radius-sm);
+}
+
+.glass-card[class*='rounded-md'] {
+  --card-radius: var(--radius-md);
+}
+
+.glass-card[class*='rounded-lg'] {
+  --card-radius: var(--radius-lg);
+}
+
+.glass-card[class*='rounded-xl'] {
+  --card-radius: var(--radius-xl);
+}
+
+.glass-card[class*='rounded-2xl'] {
+  --card-radius: var(--radius-2xl);
+}
+
+.glass-card[class*='rounded-full'] {
+  --card-radius: var(--radius-full);
+}
+
+/* ==================== 交互状态 ==================== */
+
+/* 按钮/可点击状态 */
+.glass-card[role='button'] {
+  cursor: pointer;
+  outline: none;
+}
+
+.glass-card[role='button']:focus-visible {
+  outline: 2px solid var(--color-primary-500);
+  outline-offset: 2px;
+  transform: translateY(-2px);
+}
+
+/* 悬停状态通用 */
+.glass-card:hover {
+  background: var(--glass-bg-hover);
+  border-color: var(--glass-border-hover);
+  box-shadow: var(--glow-primary), var(--glass-shadow);
+}
+
+/* ==================== 响应式 ==================== */
+
+@media (max-width: 768px) {
+  .glass-card {
+    padding: var(--spacing-md);
+  }
+}
+
+@media (max-width: 480px) {
+  .glass-card {
+    padding: var(--spacing-sm);
+  }
+
+  .glass-card-gradient::before {
+    padding: 1px;
+  }
+}
+
+/* ==================== 动画优化 ==================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .glass-card-shimmer,
+  .glass-card:hover .glass-card-shimmer {
+    animation: none;
+    opacity: 0;
+  }
+
+  .glass-card-lift:hover {
+    transform: none;
+  }
+
+  .glass-card-gradient::before {
+    transition: none;
+  }
+}
+
+/* ==================== 主题适配 ==================== */
+
+[data-theme='light'] .glass-card {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+[data-theme='light'] .glass-card:hover {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* ==================== 工具类组合 ==================== */
+
+/* 浮动效果 */
+.glass-card-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* 脉冲效果 */
+.glass-card-pulse {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    box-shadow: var(--glass-shadow);
+  }
+  50% {
+    box-shadow: var(--glow-primary), var(--glass-shadow);
+  }
+}
+
+/* ==================== 辅助效果 ==================== */
+
+/* 外部光晕 */
+.glass-card-glow {
+  box-shadow: var(--glow-primary-strong);
+}
+
+/* 内部发光 */
+.glass-card-inner-glow {
+  box-shadow: var(--glow-inner-primary);
+}
+
+/* 边框发光 */
+.glass-card-border-glow {
+  box-shadow: 0 0 0 3px var(--glass-border-hover);
+}

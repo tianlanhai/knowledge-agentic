@@ -1,0 +1,16 @@
+/**
+ * 上海宇羲伏天智能科技有限公司出品
+ * 文件级注释：Prettier 代码格式化配置
+ * 内部逻辑：统一前端代码风格
+ */
+
+{
+  "semi": true,
+  "singleQuote": true,
+  "tabWidth": 2,
+  "trailingComma": "es5",
+  "printWidth": 100,
+  "bracketSpacing": true,
+  "arrowParens": "avoid",
+  "endOfLine": "lf"
+}

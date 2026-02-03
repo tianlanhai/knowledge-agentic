@@ -1,0 +1,339 @@
+/**
+ * 上海宇羲伏天智能科技有限公司出品
+ * 文件级注释：文档列表页面样式
+ */
+
+/**
+ * 文件级注释：文档列表页面样式
+ * 内部逻辑：定义文档列表页面的视觉样式，使用 Flat Design 风格
+ * 修复：添加高度和滚动属性，与其他页面保持一致
+ */
+
+/**
+ * 文档列表页面容器样式
+ * 文件级注释：主容器，占满父容器高度，内容溢出时启用垂直滚动
+ * 内部变量：使用固定内边距和最大宽度约束
+ * 内部逻辑：height: 100% 占满父容器，overflow-y: auto 处理溢出滚动
+ */
+.doc-list-page {
+  /**
+   * 修复：设置高度为 100%，占满父容器 .app-content 的高度
+   * 问题：未设置高度导致容器无法正确约束子元素
+   * 解决：配合 overflow-y: auto 实现正确的滚动行为
+   */
+  height: 100%;
+
+  /**
+   * 修复：内容超出可视区域时启用垂直滚动
+   * 问题：父容器 .app-content 设置了 overflow: hidden
+   * 解决：在本层启用滚动，确保内容可访问
+   */
+  overflow-y: auto;
+
+  /**
+   * 添加平滑滚动效果，提升用户体验
+   */
+  scroll-behavior: smooth;
+
+  /**
+   * 内边距，保持内容与边缘的间距
+   */
+  padding: 24px;
+
+  /**
+   * 最大宽度和居中，保持大屏幕上的可读性
+   */
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+/* 页面头部 */
+.doc-list-header {
+  margin-bottom: 24px;
+}
+
+.doc-list-header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.doc-list-icon {
+  font-size: 32px;
+  color: #667eea;
+  margin-right: 16px;
+}
+
+/**
+ * 页面标题主文字
+ * 内部逻辑：使用渐变色文字效果，增强视觉吸引力
+ */
+.doc-list-title-text h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+  background: var(--color-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/**
+ * 页面标题副文字
+ * 内部逻辑：使用 CSS 变量适配深色/浅色主题
+ */
+.doc-list-title-text p {
+  margin: 4px 0 0 0;
+  font-size: 14px;
+  color: var(--text-tertiary);
+}
+
+.doc-refresh-btn {
+  border-radius: 8px;
+  height: 40px;
+  padding: 0 20px;
+}
+
+/* 搜索栏 */
+.doc-list-search {
+  margin-bottom: 24px;
+}
+
+.doc-search-input {
+  border-radius: 8px;
+  height: 40px;
+}
+
+/* 文档表格 */
+.doc-list-table {
+  margin-bottom: 24px;
+}
+
+/**
+ * 文档ID显示
+ * 内部逻辑：使用 CSS 变量适配深色/浅色主题
+ */
+.doc-id {
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--text-tertiary);
+  font-weight: 500;
+}
+
+.doc-name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.doc-name-icon {
+  color: #3b82f6;
+  font-size: 16px;
+}
+
+/**
+ * 文档名文本
+ * 内部逻辑：自适应宽度，允许截断显示，使用 CSS 变量适配深色/浅色主题
+ */
+.doc-name-text {
+  font-weight: 500;
+  color: var(--text-primary);  /* 使用 CSS 变量适配主题 */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;  /* 填充剩余空间，自适应宽度 */
+  min-width: 150px;  /* 最小宽度保证 */
+}
+
+.doc-type-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+  border: 1px solid;
+}
+
+.doc-type-text {
+  text-transform: uppercase;
+}
+
+.doc-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+/**
+ * 文档标签样式
+ * 内部逻辑：使用 CSS 变量适配深色/浅色主题
+ */
+.doc-tag {
+  background: var(--bg-hover);
+  color: var(--text-secondary);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/**
+ * 无标签提示样式
+ * 内部逻辑：使用 CSS 变量适配深色/浅色主题
+ */
+.doc-no-tags {
+  color: var(--text-disabled);
+  font-size: 13px;
+  font-style: italic;
+}
+
+/**
+ * 文档片段数显示
+ * 内部逻辑：使用 CSS 变量适配深色/浅色主题
+ */
+.doc-chunk-count {
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--text-tertiary);
+  font-weight: 500;
+}
+
+/**
+ * 时间显示
+ * 内部逻辑：使用 CSS 变量适配深色/浅色主题
+ */
+.doc-time {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 13px;
+  color: var(--text-tertiary);
+}
+
+.doc-time-icon {
+  font-size: 14px;
+}
+
+.doc-delete-btn {
+  border-radius: 6px;
+}
+
+/**
+ * 分页总计显示
+ * 内部逻辑：使用 CSS 变量适配深色/浅色主题
+ */
+.doc-pagination-total {
+  font-size: 13px;
+  color: var(--text-tertiary);
+}
+
+.doc-count {
+  color: #667eea;
+  font-weight: 600;
+}
+
+/**
+ * 文档表格样式
+ * 内部逻辑：使用 CSS 变量适配深色/浅色主题
+ */
+.doc-table {
+  background: var(--glass-bg);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.doc-table .ant-table {
+  font-size: 14px;
+}
+
+/**
+ * 表格头部样式
+ * 内部逻辑：使用 CSS 变量适配深色/浅色主题
+ */
+.doc-table .ant-table-thead > tr > th {
+  background: var(--bg-hover);
+  color: var(--text-secondary);
+  font-weight: 600;
+  border-bottom: 2px solid var(--border-base);
+}
+
+/**
+ * 表格单元格样式
+ * 内部逻辑：使用 CSS 变量适配深色/浅色主题
+ */
+.doc-table .ant-table-tbody > tr > td {
+  padding: 16px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+/**
+ * 表格行悬停样式
+ * 内部逻辑：使用 CSS 变量适配深色/浅色主题
+ */
+.doc-table .ant-table-tbody > tr:hover > td {
+  background: var(--bg-hover);
+}
+
+/* 空状态 */
+/**
+ * 空状态容器样式
+ * 内部逻辑：使用 CSS 变量适配深色/浅色主题
+ */
+.doc-empty {
+  text-align: center;
+  padding: 60px 24px;
+  border-radius: 12px;
+  border: 2px dashed var(--border-subtle);
+  background: var(--glass-bg);
+}
+
+/**
+ * 空状态图标样式
+ * 内部逻辑：使用 CSS 变量适配深色/浅色主题
+ */
+.doc-empty-icon {
+  font-size: 64px;
+  color: var(--text-tertiary);
+  margin-bottom: 16px;
+}
+
+/**
+ * 空状态标题
+ * 内部逻辑：使用 CSS 变量适配深色/浅色主题
+ */
+.doc-empty-title {
+  margin: 0 0 8px 0;
+  font-size: 20px;
+  color: var(--text-secondary);
+}
+
+/**
+ * 空状态描述
+ * 内部逻辑：使用 CSS 变量适配深色/浅色主题
+ */
+.doc-empty-description {
+  margin: 0;
+  color: var(--text-tertiary);
+  font-size: 14px;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .doc-list-page {
+    padding: 16px;
+  }
+
+  .doc-list-header-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .doc-table .ant-table-container {
+    overflow-x: auto;
+  }
+
+  .doc-name-text {
+    min-width: 100px;  /* 移动端最小宽度 */
+  }
+}

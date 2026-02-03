@@ -1,0 +1,45 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    hooks:
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-added-large-files
+      - id: check-json
+      - id: pretty-format-json
+      - id: check-merge-conflict
+      - id: check-case-conflict
+      - id: check-toml
+      - id: debug-statements
+      - id: check-ast
+      - id: check-docstring-first
+
+  - repo: local
+    hooks:
+      - id: backend-tests
+        name: Run Backend Tests
+        entry: cd code && uv run pytest tests -q
+        language: system
+        pass_filenames: \.py$
+        always_run: true
+
+      - id: frontend-tests
+        name: Run Frontend Tests
+        entry: cd frontend && pnpm test --run
+        language: system
+        pass_filenames: \.(ts|tsx)$
+        always_run: true
+
+      - id: backend-lint
+        name: Lint Backend Code
+        entry: cd code && uv run ruff check . && uv run mypy app
+        language: system
+        pass_filenames: \.py$
+        always_run: true
+
+      - id: frontend-lint
+        name: Lint Frontend Code
+        entry: cd frontend && pnpm lint
+        language: system
+        pass_filenames: \.(ts|tsx)$
+        always_run: true

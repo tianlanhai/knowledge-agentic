@@ -1,0 +1,119 @@
+[project]
+name = "knowledge-agentic"
+version = "0.1.0"
+description = "知识库智能体系统 - 支持知识摄入、语义检索、智能问答"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+
+dependencies = [
+    "fastapi==0.109.0",
+    "uvicorn==0.27.0",
+    # 说明：langgraph==0.0.26 依赖 langchain-core>=0.1.25（进而需要 langsmith>=0.1.0），
+    # 而 langchain==0.1.0 的 langsmith 约束与之冲突；这里提升到 0.1.x 的更高补丁版本以解冲突。
+    "langchain==0.1.20",
+    # 说明：与 langchain 0.1.x 生态对齐的 langchain-community 版本
+    "langchain-community==0.0.38",
+    "chromadb==0.4.22",
+    "sqlalchemy==2.0.25",
+    "python-dotenv==1.0.0",
+    "pydantic==2.5.3",
+    "pydantic-settings==2.1.0",
+    "python-multipart==0.0.6",
+    # 说明：使用轻量级文档解析库替代 unstructured，大幅减小镜像体积
+    # pdfplumber: PDF 解析（比 unstructured 小得多）
+    # python-docx: DOCX 解析
+    # python-pptx: PPTX 解析
+    # beautifulsoup4: 网页解析（WebBaseLoader 需要）
+    "pdfplumber>=0.11.0",
+    "python-docx>=1.0.0",
+    "python-pptx>=0.6.0",
+    "beautifulsoup4>=4.0.0",
+    # 说明：openpyxl: Excel 解析
+    "openpyxl>=3.1.0",
+    "ollama==0.1.6",
+    "zhipuai>=2.0.0",
+    "httpx-sse>=0.4.0",  # 内部变量：智谱AI流式API需要httpx-sse依赖
+    # 说明：PyPI 上 minimax 目前仅发布到 0.0.2；使用可满足安装的版本范围，避免依赖解析失败
+    "minimax>=0.0.2",
+    "loguru==0.7.2",
+    # 数据库驱动
+    "aiosqlite==0.19.0",        # SQLite 异步驱动
+    "asyncpg>=0.29.0",          # PostgreSQL 异步驱动
+    "langgraph==0.0.26",
+]
+
+# 说明：可选依赖分组
+# local-emb: 本地Embedding模型依赖（sentence-transformers + torch），体积约3.5GB
+# 生产环境（云端部署）使用 Ollama/云端 Embedding 时不需要安装
+[project.optional-dependencies]
+# 说明：[unstructured] 包含完整的 unstructured 支持（体积大，约 4-5GB）
+# 仅在需要完整文档解析功能时安装
+unstructured = [
+    "unstructured[pdf,docx,pptx]==0.12.0",
+]
+# 说明：[local-emb] 本地Embedding模型依赖（新增，用于v1/v3版本）
+# 包含 sentence-transformers 和 torch，体积约 3.5GB
+local-emb = [
+    "sentence-transformers==2.2.2",
+    "torch>=2.0.0",
+]
+# 说明：[local] 保留作为向后兼容别名，指向 local-emb
+local = [
+    "knowledge-agentic[local-emb]",
+]
+dev = [
+    "pytest>=7.4.0",
+    "pytest-asyncio>=0.21.0",
+    "pytest-cov>=4.1.0",
+    "httpx>=0.25.0",
+    "pytest-mock>=3.12.0",
+    "pytest-timeout>=2.1.0",  # 内部变量：添加测试超时保护，防止测试无限运行导致系统死机
+    "ruff",
+    "mypy",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+# 文件级注释：Hatchling Wheel 构建配置
+# 内部逻辑：显式指定需要打包的 Python 包目录，避免构建时无法推断文件选择规则
+packages = ["app"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W"]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.10"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = false
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+# 禁用langsmith pytest插件以解决兼容性问题
+# 说明：langsmith.pytest_plugin在当前版本中不存在，需要禁用以避免pytest启动失败
+required_plugins = []
+# 内部变量：测试超时配置（60秒），防止测试无限运行导致系统死机
+timeout = 60
+timeout_method = "thread"
+addopts = [
+    "--strict-markers",
+    "--strict-config",
+    "-p",
+    "no:langsmith",
+    "--cov=app",
+    "--cov-report=term-missing",
+    "--timeout=60",  # 内部变量：添加超时保护，单个测试60秒后自动终止
+]

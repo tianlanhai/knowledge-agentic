@@ -1,0 +1,339 @@
+/**
+ * 上海宇羲伏天智能科技有限公司出品
+ * 文件级注释：Header 组件样式，使用 CSS 变量，支持主题切换
+ */
+
+/**
+ * Header 组件样式
+ * 使用 CSS 变量，支持主题切换
+ */
+
+/* ==================== Header 容器 ==================== */
+
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--header-height);
+  padding: 0 var(--spacing-lg);
+  background: var(--header-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border-bottom: 1px solid var(--header-border);
+  box-shadow: var(--shadow-sm);
+  position: sticky;
+  top: 0;
+  z-index: var(--z-sticky);
+  transition: all var(--transition-base);
+}
+
+/* ==================== 左侧区域 ==================== */
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+/* Logo 图标 */
+.logo-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: var(--color-gradient);
+  border-radius: var(--radius-md);
+  color: #ffffff;
+  box-shadow: var(--glow-primary);
+  transition: all var(--transition-base);
+  position: relative;
+  overflow: hidden;
+}
+
+.logo-icon:hover {
+  box-shadow: var(--glow-primary-strong);
+  transform: scale(1.05) rotate(5deg);
+}
+
+.logo-icon::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: var(--shine-gradient);
+  transform: translateX(-100%) rotate(45deg);
+  transition: transform 0.6s var(--ease-sharp);
+}
+
+.logo-icon:hover::after {
+  transform: translateX(100%) rotate(45deg);
+}
+
+/* 应用标题 */
+.app-title {
+  margin: 0;
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  background: var(--color-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  transition: all var(--transition-base);
+}
+
+.app-title:hover {
+  transform: translateX(2px);
+  text-shadow: var(--glow-primary);
+}
+
+/* 分隔线 */
+.header-divider {
+  width: 1px;
+  height: 20px;
+  background: linear-gradient(to bottom, transparent, var(--border-base), transparent);
+}
+
+/* 页面标题 */
+.page-title {
+  margin: 0;
+  font-size: var(--font-size-md);
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: all var(--transition-base);
+  position: relative;
+}
+
+.page-title::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--color-gradient);
+  transition: width var(--transition-base);
+}
+
+.page-title:hover::after {
+  width: 100%;
+}
+
+/* ==================== 右侧区域 ==================== */
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+}
+
+/* 状态指示器 */
+.status-indicator {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-full);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  transition: all var(--transition-base);
+}
+
+.status-indicator:hover {
+  background: var(--glass-bg-hover);
+  border-color: var(--glass-border-hover);
+  box-shadow: var(--glow-success);
+  transform: translateY(-1px);
+}
+
+.status-dot {
+  display: block;
+  width: 8px;
+  height: 8px;
+  background-color: var(--color-success);
+  border-radius: var(--radius-full);
+  animation: pulse-glow 2s ease-in-out infinite;
+  box-shadow: 0 0 10px var(--color-success);
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 1;
+    transform: scale(1);
+    box-shadow: 0 0 10px var(--color-success);
+  }
+  50% {
+    opacity: 0.7;
+    transform: scale(1.2);
+    box-shadow: 0 0 20px var(--color-success);
+  }
+}
+
+.status-text {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
+/* 操作按钮 */
+.header-action-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  height: 36px;
+  padding: 0 var(--spacing-md);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  background-color: transparent;
+  border: 1px solid var(--border-base);
+  cursor: pointer;
+  transition: all var(--transition-base);
+  position: relative;
+  overflow: hidden;
+}
+
+.header-action-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--color-gradient);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.header-action-btn:hover {
+  color: var(--text-primary);
+  background-color: var(--bg-hover);
+  border-color: var(--border-strong);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.header-action-btn:hover::before {
+  opacity: 0.1;
+}
+
+.header-action-btn:active {
+  transform: translateY(0);
+}
+
+.header-action-btn span {
+  position: relative;
+  z-index: 1;
+}
+
+/* 用户头像 */
+.user-avatar {
+  background: var(--color-gradient) !important;
+  color: #ffffff !important;
+  border: 2px solid var(--border-subtle);
+  transition: all var(--transition-base);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.user-avatar:hover {
+  border-color: var(--color-primary-500);
+  transform: scale(1.05);
+  box-shadow: var(--glow-primary);
+}
+
+.user-avatar::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    135deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    transparent 100%
+  );
+  transform: translateX(-100%) rotate(45deg);
+  transition: transform 0.6s var(--ease-sharp);
+}
+
+.user-avatar:hover::after {
+  transform: translateX(100%) rotate(45deg);
+}
+
+/* ==================== 响应式设计 ==================== */
+
+@media (max-width: 768px) {
+  .app-header {
+    padding: 0 var(--spacing-md);
+    background: var(--glass-bg);
+  }
+
+  .page-title {
+    display: none;
+  }
+
+  .status-text {
+    display: none;
+  }
+
+  .header-action-btn span {
+    display: none;
+  }
+
+  .header-action-btn {
+    padding: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-full);
+  }
+
+  .logo-icon {
+    width: 32px;
+    height: 32px;
+  }
+
+  .app-title {
+    font-size: var(--font-size-md);
+  }
+}
+
+@media (max-width: 480px) {
+  .app-header {
+    padding: 0 var(--spacing-sm);
+  }
+
+  .header-divider {
+    display: none;
+  }
+
+  .status-indicator {
+    padding: var(--spacing-xs) var(--spacing-sm);
+  }
+}
+
+/* ==================== 动画优化 ==================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .logo-icon,
+  .logo-icon::after,
+  .status-dot,
+  .header-action-btn,
+  .user-avatar,
+  .user-avatar::after,
+  .page-title::after {
+    animation: none;
+    transition: none;
+  }
+
+  .logo-icon:hover,
+  .user-avatar:hover,
+  .header-action-btn:hover,
+  .status-indicator:hover {
+    transform: none;
+  }
+}

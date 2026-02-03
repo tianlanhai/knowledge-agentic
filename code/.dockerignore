@@ -1,0 +1,78 @@
+# Python缓存文件
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# 测试相关
+tests/
+htmlcov/
+.coverage
+coverage.xml
+*.cover
+.pytest_cache/
+
+# 开发工具
+.git/
+.gitignore
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# 环境文件（只排除含敏感信息的本地配置）
+.env.local
+.env.*.local
+venv/
+env/
+ENV/
+
+# 日志文件
+*.log
+logs/
+
+# 脚本文件（保留docker相关脚本在构建上下文中）
+script/parse_taro_docs.ps1
+
+# 数据库脚本（不需要在镜像中）
+script/database/
+
+# 规则文件
+rule/
+
+# 临时文件
+*.tmp
+*.bak
+.DS_Store
+
+# 数据目录（挂载卷，不需要打包进镜像）
+data/
+models/
+*.db
+*.sqlite
+chroma_db/
+
+# 其他大文件
+*.xlsx
+*.xls
+*.pdf
+*.docx
+*.doc
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

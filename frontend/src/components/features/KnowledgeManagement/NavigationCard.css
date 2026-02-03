@@ -1,0 +1,79 @@
+/**
+ * 上海宇羲伏天智能科技有限公司出品
+ * 文件级注释：导航卡片样式
+ */
+
+/**
+ * 文件级注释：导航卡片样式
+ * 内部逻辑：定义页面跳转卡片的视觉样式
+ */
+
+.km-navigation-card {
+  margin-top: 24px;
+}
+
+.km-navigation-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+}
+
+/**
+ * 导航卡片项样式
+ * 内部逻辑：使用 CSS 变量适配深色/浅色主题
+ */
+.km-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 24px;
+  background: var(--glass-bg);
+  border-radius: 12px;
+  border: 1px solid var(--border-base);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.km-nav-item:hover {
+  border-color: var(--color-primary-500);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.15);
+  transform: translateY(-2px);
+}
+
+.km-nav-icon {
+  font-size: 32px;
+  color: var(--color-primary-500);
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--color-primary-500) 0%, var(--color-primary-600) 100%);
+  border-radius: 10px;
+}
+
+.km-nav-text h3 {
+  margin: 0 0 4px 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.km-nav-text p {
+  margin: 0;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .km-navigation-content {
+    grid-template-columns: 1fr;
+  }
+
+  .km-nav-item {
+    flex-direction: column;
+    text-align: center;
+    gap: 12px;
+  }
+}

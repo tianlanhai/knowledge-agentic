@@ -1,0 +1,390 @@
+/**
+ * 上海宇羲伏天智能科技有限公司出品
+ * 文件级注释：GradientButton 组件样式 - 渐变按钮、波纹效果、光泽动画、加载状态
+ */
+
+/**
+ * GradientButton 组件样式
+ * 渐变按钮、波纹效果、光泽动画、加载状态
+ */
+
+/* ==================== 按钮基础样式 ==================== */
+
+.gradient-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-lg);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  font-family: var(--font-sans);
+  cursor: pointer;
+  border: 1px solid var(--btn-border);
+  background: var(--btn-gradient);
+  color: var(--btn-color);
+  border-radius: var(--btn-radius);
+  box-shadow: var(--btn-glow);
+  transition: all var(--transition-base);
+  outline: none;
+  overflow: hidden;
+}
+
+.gradient-btn:hover {
+  background: var(--btn-gradient-hover);
+  box-shadow: var(--btn-glow-strong);
+  transform: translateY(-1px);
+  border-color: var(--btn-border-hover);
+}
+
+.gradient-btn:active {
+  transform: translateY(0);
+  background: var(--btn-gradient-active);
+}
+
+.gradient-btn:disabled,
+.gradient-btn[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* ==================== 尺寸变体 ==================== */
+
+.gradient-btn-sm {
+  padding: var(--spacing-xs) var(--spacing-md);
+  font-size: var(--font-size-xs);
+  height: 32px;
+}
+
+.gradient-btn-md {
+  padding: var(--spacing-sm) var(--spacing-lg);
+  font-size: var(--font-size-sm);
+  height: 40px;
+}
+
+.gradient-btn-lg {
+  padding: var(--spacing-md) var(--spacing-xl);
+  font-size: var(--font-size-md);
+  height: 48px;
+}
+
+.gradient-btn-xl {
+  padding: var(--spacing-lg) var(--spacing-2xl);
+  font-size: var(--font-size-lg);
+  height: 56px;
+}
+
+/* ==================== 样式变体 ==================== */
+
+/* 主要按钮 */
+.gradient-btn-primary {
+  --btn-gradient: var(--color-gradient);
+  --btn-gradient-hover: var(--color-gradient-hover);
+  --btn-color: #ffffff;
+  --btn-border: transparent;
+  --btn-glow: var(--glow-primary);
+  --btn-glow-strong: var(--glow-primary-strong);
+  --btn-radius: var(--radius-md);
+}
+
+/* 次要按钮 */
+.gradient-btn-secondary {
+  --btn-gradient: var(--glass-bg);
+  --btn-gradient-hover: var(--glass-bg-hover);
+  --btn-color: var(--text-primary);
+  --btn-border: var(--glass-border);
+  --btn-glow: var(--glass-shadow);
+  --btn-glow-strong: var(--glass-shadow);
+  --btn-radius: var(--radius-md);
+}
+
+.gradient-btn-secondary:hover {
+  background: var(--glass-bg-hover);
+  border-color: var(--glass-border-hover);
+}
+
+/* 成功按钮 */
+.gradient-btn-success {
+  --btn-gradient: var(--color-success);
+  --btn-gradient-hover: var(--color-success);
+  --btn-color: #ffffff;
+  --btn-border: transparent;
+  --btn-glow: var(--glow-success);
+  --btn-glow-strong: var(--glow-success-strong);
+  --btn-radius: var(--radius-md);
+}
+
+/* 警告按钮 */
+.gradient-btn-warning {
+  --btn-gradient: var(--color-warning);
+  --btn-gradient-hover: var(--color-warning);
+  --btn-color: #ffffff;
+  --btn-border: transparent;
+  --btn-glow: var(--glow-warning);
+  --btn-glow-strong: var(--glow-warning-strong);
+  --btn-radius: var(--radius-md);
+}
+
+/* 错误按钮 */
+.gradient-btn-error {
+  --btn-gradient: var(--color-error);
+  --btn-gradient-hover: var(--color-error);
+  --btn-color: #ffffff;
+  --btn-border: transparent;
+  --btn-glow: var(--glow-error);
+  --btn-glow-strong: var(--glow-error-strong);
+  --btn-radius: var(--radius-md);
+}
+
+/* 幽灵按钮 */
+.gradient-btn-ghost {
+  --btn-gradient: transparent;
+  --btn-gradient-hover: var(--gradient-primary-subtle);
+  --btn-color: var(--color-primary-500);
+  --btn-border: var(--glass-border);
+  --btn-glow: transparent;
+  --btn-glow-strong: var(--glass-shadow);
+  --btn-radius: var(--radius-md);
+}
+
+.gradient-btn-ghost:hover {
+  --btn-border: var(--color-primary-500);
+  --btn-glow: var(--glow-primary);
+}
+
+/* ==================== 加载状态 ==================== */
+
+.gradient-btn-loading {
+  position: relative;
+  cursor: wait;
+}
+
+.gradient-btn-loading .gradient-btn-content {
+  opacity: 0.6;
+}
+
+.gradient-btn-loading-icon {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gradient-btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: var(--spacing-sm);
+  font-size: var(--font-size-md);
+}
+
+/* 加载动画旋转器 */
+.gradient-btn-spinner {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid currentColor;
+  border-radius: 50%;
+  border-top-color: transparent;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ==================== 圆角变体 ==================== */
+
+.gradient-btn-rounded-sm {
+  --btn-radius: var(--radius-sm);
+}
+
+.gradient-btn-rounded-md {
+  --btn-radius: var(--radius-md);
+}
+
+.gradient-btn-rounded-lg {
+  --btn-radius: var(--radius-lg);
+}
+
+.gradient-btn-rounded-full {
+  --btn-radius: var(--radius-full);
+}
+
+.gradient-btn-rounded-none {
+  --btn-radius: 0;
+}
+
+/* ==================== 块级按钮 ==================== */
+
+.gradient-btn-block {
+  display: flex;
+  width: 100%;
+}
+
+/* ==================== 悬停和波纹效果 ==================== */
+
+.gradient-btn-rippling {
+  position: relative;
+}
+
+.gradient-btn-rippling::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--btn-color);
+  opacity: 0;
+  border-radius: inherit;
+}
+
+/* 波纹动画 */
+@keyframes rippleEffect {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(4);
+    opacity: 0;
+  }
+}
+
+.gradient-btn-hover {
+  position: relative;
+}
+
+/* ==================== 光泽动画 ==================== */
+
+.gradient-btn-shine {
+  position: absolute;
+  inset: 0;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    135deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.4) 50%,
+    transparent 100%
+  );
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(var(--shine-left), var(--shine-top));
+  transition: opacity var(--transition-fast);
+  animation: shineMove 3s infinite linear;
+}
+
+.gradient-btn:hover .gradient-btn-shine {
+  opacity: 1;
+}
+
+@keyframes shineMove {
+  0% {
+    transform: translate(var(--shine-left), var(--shine-top));
+  }
+  50% {
+    transform: translate(calc(var(--shine-left) + 50%), var(--shine-top));
+  }
+  100% {
+    transform: translate(calc(var(--shine-left) + 100%), var(--shine-top));
+  }
+}
+
+/* ==================== 内容和图标 ==================== */
+
+.gradient-btn-content {
+  position: relative;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  transition: opacity var(--transition-fast);
+}
+
+.gradient-btn-ripple-layer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: inherit;
+  pointer-events: none;
+}
+
+/* ==================== 焦点和无障碍 ==================== */
+
+.gradient-btn:focus-visible {
+  outline: 2px solid var(--color-primary-500);
+  outline-offset: 2px;
+}
+
+.gradient-btn:active:focus-visible {
+  outline: 2px solid var(--color-primary-500);
+  outline-offset: 2px;
+  transform: translateY(0);
+}
+
+/* ==================== 响应式设计 ==================== */
+
+@media (max-width: 768px) {
+  .gradient-btn {
+    width: 100%;
+  }
+}
+
+/* ==================== 动画优化 ==================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .gradient-btn-shine {
+    animation: none;
+  }
+
+  .gradient-btn-spinner {
+    animation-duration: 2s;
+  }
+
+  .gradient-btn,
+  .gradient-btn:hover,
+  .gradient-btn:active {
+    transition: background-color 0.15s, box-shadow 0.15s, transform 0.1s;
+  }
+}
+
+/* ==================== 按钮组 ==================== */
+
+.gradient-btn-group {
+  display: flex;
+  gap: var(--spacing-md);
+}
+
+.gradient-btn-group .gradient-btn {
+  flex: 1;
+}
+
+.gradient-btn-group-vertical {
+  flex-direction: column;
+}
+
+/* ==================== 文本按钮 ==================== */
+
+.gradient-btn-text {
+  background: transparent;
+  border: none;
+  color: var(--color-primary-500);
+  box-shadow: none;
+  padding: var(--spacing-xs) var(--spacing-sm);
+}
+
+.gradient-btn-text:hover {
+  background: var(--gradient-primary-subtle);
+  color: var(--color-primary-600);
+  box-shadow: none;
+}
+
+.gradient-btn-text:active {
+  background: var(--gradient-primary-subtle);
+  transform: none;
+}

@@ -1,0 +1,311 @@
+/**
+ * 上海宇羲伏天智能科技有限公司出品
+ * 文件级注释：任务列表页面样式
+ */
+
+/**
+ * 文件级注释：任务列表页面样式
+ * 内部逻辑：定义任务列表页面的视觉样式，使用 Flat Design 风格
+ * 修复：添加高度和滚动属性，与其他页面保持一致
+ */
+
+/**
+ * 任务列表页面容器样式
+ * 文件级注释：主容器，占满父容器高度，内容溢出时启用垂直滚动
+ * 内部变量：使用固定内边距和最大宽度约束
+ * 内部逻辑：height: 100% 占满父容器，overflow-y: auto 处理溢出滚动
+ */
+.task-list-page {
+  /**
+   * 修复：设置高度为 100%，占满父容器 .app-content 的高度
+   * 问题：未设置高度导致容器无法正确约束子元素
+   * 解决：配合 overflow-y: auto 实现正确的滚动行为
+   */
+  height: 100%;
+
+  /**
+   * 修复：内容超出可视区域时启用垂直滚动
+   * 问题：父容器 .app-content 设置了 overflow: hidden
+   * 解决：在本层启用滚动，确保内容可访问
+   */
+  overflow-y: auto;
+
+  /**
+   * 添加平滑滚动效果，提升用户体验
+   */
+  scroll-behavior: smooth;
+
+  /**
+   * 内边距，保持内容与边缘的间距
+   */
+  padding: 24px;
+
+  /**
+   * 最大宽度和居中，保持大屏幕上的可读性
+   */
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+/* 页面头部 */
+.task-list-header {
+  margin-bottom: 24px;
+}
+
+.task-list-header-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/**
+ * 任务列表页面标题主文字
+ * 内部逻辑：使用渐变色文字效果，增强视觉吸引力
+ */
+.task-list-title h2 {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+  background: var(--color-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/**
+ * 任务列表页面标题副文字
+ * 内部逻辑：使用 CSS 变量适配深色/浅色主题
+ */
+.task-list-title p {
+  margin: 4px 0 0 0;
+  font-size: 14px;
+  color: var(--text-tertiary);
+}
+
+.task-refresh-btn {
+  border-radius: 8px;
+  height: 40px;
+  padding: 0 20px;
+}
+
+/* 筛选栏 */
+.task-list-filter {
+  margin-bottom: 24px;
+}
+
+.task-filter-content {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/**
+ * 筛选标签样式
+ * 内部逻辑：使用 CSS 变量适配深色/浅色主题
+ */
+.task-filter-label {
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.task-filter-select {
+  width: 150px;
+}
+
+/**
+ * 筛选计数样式
+ * 内部逻辑：使用 CSS 变量适配深色/浅色主题
+ */
+.task-filter-count {
+  margin-left: auto;
+  font-size: 14px;
+  color: var(--text-tertiary);
+}
+
+/* 任务表格 */
+.task-list-table {
+  margin-bottom: 24px;
+}
+
+/**
+ * 任务ID样式
+ * 内部逻辑：使用 CSS 变量适配深色/浅色主题
+ */
+.task-id {
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--text-tertiary);
+  font-weight: 500;
+}
+
+/**
+ * 任务名称样式
+ * 内部逻辑：使用 CSS 变量适配深色/浅色主题
+ */
+.task-name {
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.task-progress-bar {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+}
+
+.task-progress-fill {
+  flex: 1;
+  height: 6px;
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+/**
+ * 任务进度文字样式
+ * 内部逻辑：使用 CSS 变量适配深色/浅色主题
+ */
+.task-progress-text {
+  font-size: 12px;
+  color: var(--text-tertiary);
+  min-width: 35px;
+  text-align: right;
+}
+
+/**
+ * 任务错误信息样式
+ */
+.task-error {
+  color: var(--color-error);
+  font-size: 13px;
+  word-break: break-word;
+}
+
+/**
+ * 任务文档ID样式
+ * 内部逻辑：使用 CSS 变量适配深色/浅色主题
+ */
+.task-doc-id {
+  font-family: 'JetBrains Mono', monospace;
+  color: var(--text-tertiary);
+}
+
+/**
+ * 任务创建时间样式
+ * 内部逻辑：使用 CSS 变量适配深色/浅色主题
+ */
+.task-created-at {
+  color: var(--text-tertiary);
+  font-size: 13px;
+}
+
+/**
+ * 任务表格样式
+ * 内部逻辑：使用 CSS 变量适配深色/浅色主题
+ */
+.task-table {
+  background: var(--glass-bg);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.task-table .ant-table {
+  font-size: 14px;
+}
+
+/**
+ * 任务表格头部样式
+ * 内部逻辑：使用 CSS 变量适配深色/浅色主题
+ */
+.task-table .ant-table-thead > tr > th {
+  background: var(--bg-hover);
+  color: var(--text-secondary);
+  font-weight: 600;
+  border-bottom: 2px solid var(--border-base);
+}
+
+/**
+ * 任务表格单元格样式
+ * 内部逻辑：使用 CSS 变量适配深色/浅色主题
+ */
+.task-table .ant-table-tbody > tr > td {
+  padding: 16px;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+/**
+ * 任务表格行悬停样式
+ * 内部逻辑：使用 CSS 变量适配深色/浅色主题
+ */
+.task-table .ant-table-tbody > tr:hover > td {
+  background: var(--bg-hover);
+}
+
+/* 空状态 */
+/**
+ * 任务空状态容器样式
+ * 内部逻辑：使用 CSS 变量适配深色/浅色主题
+ */
+.task-empty-state {
+  text-align: center;
+  padding: 60px 24px;
+  border-radius: 12px;
+  border: 2px dashed var(--border-subtle);
+  background: var(--glass-bg);
+}
+
+/**
+ * 任务空状态图标样式
+ * 内部逻辑：使用 CSS 变量适配深色/浅色主题
+ */
+.task-empty-icon {
+  font-size: 64px;
+  color: var(--text-tertiary);
+  margin-bottom: 16px;
+}
+
+/**
+ * 任务空状态标题样式
+ * 内部逻辑：使用 CSS 变量适配深色/浅色主题
+ */
+.task-empty-state h3 {
+  margin: 0 0 8px 0;
+  font-size: 20px;
+  color: var(--text-secondary);
+}
+
+/**
+ * 任务空状态描述样式
+ * 内部逻辑：使用 CSS 变量适配深色/浅色主题
+ */
+.task-empty-state p {
+  margin: 0;
+  color: var(--text-tertiary);
+  font-size: 14px;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .task-list-page {
+    padding: 16px;
+  }
+
+  .task-list-header-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .task-filter-content {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .task-filter-count {
+    margin-left: 0;
+  }
+
+  .task-table .ant-table-container {
+    overflow-x: auto;
+  }
+}

@@ -1,0 +1,782 @@
+/**
+ * 上海宇羲伏天智能科技有限公司出品
+ * 文件级注释：DocumentAnalysis 组件样式，使用 CSS 变量，支持主题切换，增强视觉效果
+ */
+
+/**
+ * DocumentAnalysis 组件样式
+ * 使用 CSS 变量，支持主题切换
+ * 增强视觉效果 - 玻璃拟态、渐变边框、光晕效果
+ */
+
+/* ==================== 容器 ==================== */
+
+/**
+ * 文档分析容器样式
+ * 文件级注释：主容器，占满父容器高度，内容溢出时启用垂直滚动
+ * 内部变量：使用 CSS 变量控制内边距和视觉效果
+ * 内部逻辑：height: 100% 占满父容器，overflow-y: auto 处理溢出滚动
+ */
+.analysis-container {
+  /**
+   * 修复：设置高度为 100%，占满父容器 .app-content 的高度
+   * 问题：未设置高度导致容器无法正确约束子元素
+   * 解决：配合 overflow-y: auto 实现正确的滚动行为
+   */
+  height: 100%;
+
+  /**
+   * 修复：内容超出可视区域时启用垂直滚动
+   * 问题：父容器 .app-content 设置了 overflow: hidden
+   * 解决：在本层启用滚动，确保内容可访问
+   */
+  overflow-y: auto;
+
+  /**
+   * 添加平滑滚动效果，提升用户体验
+   */
+  scroll-behavior: smooth;
+
+  /**
+   * 内边距，保持内容与边缘的间距
+   */
+  padding: var(--spacing-lg);
+
+  /**
+   * 玻璃拟态背景效果
+   */
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+
+  /**
+   * 边框和圆角
+   */
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+
+  /**
+   * 入场动画
+   */
+  animation: slideInUp var(--transition-slow) var(--ease-smooth);
+}
+
+/* ==================== 头部 ==================== */
+
+.analysis-header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-lg);
+  padding-bottom: var(--spacing-lg);
+  border-bottom: 1px solid var(--glass-border);
+  position: relative;
+}
+
+.analysis-header::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 100px;
+  height: 2px;
+  background: var(--color-gradient);
+  border-radius: 1px;
+  animation: expandLine 1s ease-out;
+}
+
+@keyframes expandLine {
+  0% { width: 0; }
+  100% { width: 100px; }
+}
+
+.analysis-header-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: var(--color-gradient);
+  border-radius: var(--radius-md);
+  color: #ffffff;
+  font-size: var(--font-size-lg);
+  box-shadow: var(--glow-primary);
+  transition: all var(--transition-base);
+}
+
+.analysis-header-icon:hover {
+  box-shadow: var(--glow-primary-strong);
+  transform: scale(1.1) rotate(5deg);
+}
+
+.analysis-header-title h3 {
+  margin: 0;
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  background: var(--color-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.analysis-header-title p {
+  margin: var(--spacing-xs) 0 0;
+  font-size: var(--font-size-sm);
+  color: var(--text-tertiary);
+}
+
+/* ==================== 表单 ==================== */
+
+.analysis-form-group {
+  margin-bottom: var(--spacing-lg);
+  position: relative;
+  z-index: 1;
+}
+
+.analysis-form-label {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  margin-bottom: var(--spacing-sm);
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.analysis-form-label svg {
+  color: var(--color-primary-500);
+  transition: all var(--transition-base);
+}
+
+.analysis-form-label:hover svg {
+  transform: scale(1.1);
+  color: var(--color-primary-600);
+}
+
+.analysis-select {
+  width: 100%;
+}
+
+.analysis-select .ant-select-selector {
+  background: var(--glass-bg) !important;
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border-color: var(--glass-border) !important;
+  transition: all var(--transition-base);
+}
+
+.analysis-select .ant-select-selector:hover {
+  border-color: var(--glass-border-hover) !important;
+  box-shadow: var(--glow-primary);
+  transform: translateY(-1px);
+}
+
+.analysis-select .ant-select-selector:focus {
+  border-color: var(--color-primary-500) !important;
+  box-shadow: var(--glow-inner-primary), 0 0 0 3px rgba(102, 126, 234, 0.2);
+}
+
+.analysis-option {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  transition: all var(--transition-base);
+}
+
+.analysis-option:hover {
+  transform: translateX(4px);
+}
+
+.analysis-option-icon {
+  color: var(--color-primary-500);
+  font-size: var(--font-size-md);
+}
+
+.analysis-option-type {
+  font-size: var(--font-size-xs);
+  color: var(--text-tertiary);
+  font-weight: 500;
+}
+
+/* 复选框 */
+.analysis-checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.analysis-checkbox {
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--spacing-sm);
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  transition: all var(--transition-base);
+}
+
+.analysis-checkbox:hover {
+  border-color: var(--color-primary-500);
+  box-shadow: var(--glow-primary);
+  transform: translateY(-1px);
+}
+
+.analysis-checkbox-content {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+.analysis-checkbox-icon {
+  color: var(--color-primary-500);
+  font-size: var(--font-size-lg);
+  transition: all var(--transition-base);
+}
+
+.analysis-checkbox:hover .analysis-checkbox-icon {
+  transform: scale(1.1);
+}
+
+.analysis-checkbox-label {
+  font-size: var(--font-size-sm);
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.analysis-checkbox-type {
+  font-size: var(--font-size-xs);
+  color: var(--text-tertiary);
+}
+
+/* ==================== 按钮 ==================== */
+
+.analysis-submit-btn {
+  height: 48px;
+  font-weight: 600;
+  background: var(--color-gradient);
+  box-shadow: var(--glow-primary);
+  border: none;
+  transition: all var(--transition-base);
+  position: relative;
+  overflow: hidden;
+}
+
+.analysis-submit-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, transparent 0%, rgba(255,255,255,0.2) 50%, transparent 100%);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.analysis-submit-btn:hover {
+  background: var(--color-gradient-hover);
+  box-shadow: var(--glow-primary-strong);
+  transform: translateY(-2px);
+}
+
+.analysis-submit-btn:hover::before {
+  opacity: 1;
+}
+
+/* ==================== 加载状态 ==================== */
+
+.analysis-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-2xl) var(--spacing-lg);
+  text-align: center;
+}
+
+/* ==================== 结果卡片 ==================== */
+
+.analysis-result-card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  animation: slideInUp var(--transition-base) var(--ease-smooth);
+  position: relative;
+}
+
+.analysis-result-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gradient-primary-subtle);
+  opacity: 0;
+  transition: opacity var(--transition-base);
+}
+
+.analysis-result-card:hover {
+  border-color: var(--color-primary-500);
+  box-shadow: var(--glow-primary), var(--glass-shadow);
+  transform: translateY(-2px);
+}
+
+.analysis-result-card:hover::before {
+  opacity: 1;
+}
+
+.analysis-result-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-md) var(--spacing-md);
+  background: var(--bg-base);
+  border-bottom: 1px solid var(--glass-border);
+  position: relative;
+  z-index: 1;
+}
+
+.analysis-result-title {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  font-size: var(--font-size-md);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.analysis-result-title svg {
+  color: var(--color-primary-500);
+  font-size: var(--font-size-lg);
+  transition: all var(--transition-base);
+}
+
+.analysis-result-title:hover svg {
+  transform: scale(1.1);
+  color: var(--color-primary-600);
+}
+
+.analysis-copy-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  color: var(--color-primary-500);
+  background: transparent;
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  transition: all var(--transition-base);
+}
+
+.analysis-copy-btn:hover {
+  color: var(--text-primary);
+  background: var(--color-primary-500);
+  border-color: var(--color-primary-500);
+  box-shadow: var(--glow-primary);
+  transform: translateY(-1px) scale(1.05);
+}
+
+.analysis-copy-btn.success {
+  color: var(--color-success);
+  border-color: var(--color-success);
+}
+
+.analysis-copy-btn.success:hover {
+  background: var(--color-success);
+  color: #ffffff;
+  box-shadow: var(--glow-success);
+}
+
+.analysis-result-content {
+  padding: var(--spacing-md);
+  position: relative;
+  z-index: 1;
+}
+
+.analysis-result-content p {
+  margin: 0;
+  /**
+   * 可读性增强：字体大小从 var(--font-size-sm) (14px) 提升到 var(--font-size-md) (16px)
+   * 提升长文本阅读体验，减少眼睛疲劳
+   */
+  font-size: var(--font-size-md);
+  color: var(--text-secondary);
+  line-height: var(--line-height-relaxed);
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* ==================== 标签页 ==================== */
+
+/**
+ * 标签页导航栏样式
+ * 内部逻辑：增强对比度和层级，确保标签页可见
+ * 修复：移除负 margin，避免下拉框遮挡导航栏
+ */
+.analysis-tabs .ant-tabs-nav {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border-bottom: 1px solid var(--glass-border);
+  padding: 0 var(--spacing-md);
+  margin: 0;
+  position: relative;
+  z-index: 10;
+}
+
+.analysis-tabs .ant-tabs-nav::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: var(--spacing-md);
+  right: var(--spacing-md);
+  height: 2px;
+  background: var(--color-gradient);
+  border-radius: 1px;
+}
+
+/**
+ * 标签页标签样式
+ * 内部逻辑：增强文字对比度，确保深色主题下可见
+ * 修复：增加颜色对比度和悬停效果
+ */
+.analysis-tabs .ant-tabs-tab {
+  padding: var(--spacing-sm) var(--spacing-md);
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+  transition: all var(--transition-base);
+  position: relative;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.analysis-tabs .ant-tabs-tab:hover {
+  background: var(--gradient-primary-subtle);
+  color: var(--text-primary);
+  transform: translateY(-2px);
+}
+
+.analysis-tabs .ant-tabs-tab-active {
+  background: var(--color-gradient) !important;
+  box-shadow: var(--glow-primary);
+  transform: translateY(-2px);
+}
+
+/**
+ * 修复：激活标签的文字颜色需要设置到内部 .ant-tabs-tab-btn 元素
+ * 内部逻辑：Ant Design Tabs 的 DOM 结构中，文字在 .ant-tabs-tab-btn 内
+ */
+.analysis-tabs .ant-tabs-tab-active .ant-tabs-tab-btn {
+  color: #ffffff !important;
+}
+
+.analysis-tabs .ant-tabs-ink-bar {
+  background: var(--color-gradient) !important;
+  height: 3px !important;
+}
+
+/**
+ * 标签页内容区域
+ * 内部逻辑：确保内容层级正确
+ */
+.analysis-tabs .ant-tabs-content {
+  position: relative;
+  z-index: 5;  /* 内容层级低于导航栏 */
+}
+
+.analysis-tabs .ant-tabs-tabpane {
+  position: relative;
+  z-index: 1;
+}
+
+.analysis-tab-label {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+}
+
+/**
+ * 下拉选择器样式
+ * 内部逻辑：使用 getPopupContainer 控制下拉框渲染位置，避免遮挡标签页
+ * 注意：Ant Design Select 的下拉框通过 Portal 渲染到 body
+ * 解决方案：在组件中使用 getPopupContainer 将下拉框渲染到当前容器内
+ */
+.analysis-select .ant-select-dropdown {
+  z-index: 1000 !important;
+}
+
+.analysis-select .ant-select-selector {
+  position: relative;
+  z-index: 1;
+}
+
+/**
+ * 下拉框弹出层容器样式
+ * 内部逻辑：确保弹出层在正确位置显示
+ */
+.analysis-tabs .ant-select-dropdown {
+  background: var(--glass-bg);
+  backdrop-filter: blur(var(--glass-blur));
+  -webkit-backdrop-filter: blur(var(--glass-blur));
+  border-color: var(--glass-border);
+}
+
+/* ==================== 空状态 ==================== */
+
+.analysis-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-2xl) var(--spacing-lg);
+  text-align: center;
+  animation: fadeIn var(--transition-slow) var(--ease-smooth);
+}
+
+.analysis-empty-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  margin-bottom: var(--spacing-lg);
+  background: var(--gradient-primary-subtle);
+  border: 2px solid var(--glass-border);
+  border-radius: var(--radius-xl);
+  color: var(--color-primary-500);
+  font-size: 36px;
+  animation: float 3s ease-in-out infinite;
+}
+
+.analysis-empty-title {
+  margin: 0 0 var(--spacing-sm);
+  font-size: var(--font-size-xl);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.analysis-empty-description {
+  margin: 0;
+  max-width: 400px;
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  line-height: var(--line-height-relaxed);
+}
+
+/* ==================== 响应式设计 ==================== */
+
+@media (max-width: 768px) {
+  .analysis-container {
+    padding: var(--spacing-md);
+  }
+
+  .analysis-header {
+    flex-direction: column;
+    gap: var(--spacing-sm);
+  }
+
+  .analysis-result-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+  }
+}
+
+@media (max-width: 480px) {
+  .analysis-header-icon {
+    width: 32px;
+    height: 32px;
+    font-size: var(--font-size-md);
+  }
+
+  .analysis-empty-icon {
+    width: 64px;
+    height: 64px;
+    font-size: 28px;
+  }
+
+  .analysis-submit-btn {
+    height: 40px;
+  }
+}
+
+/* ==================== Markdown 内容样式 ==================== */
+
+/**
+ * Markdown 格式化内容的样式
+ * 文件级注释：为 DocumentFormatter 组件生成的 HTML 元素添加样式
+ * 内部逻辑：支持标题、段落、粗体、斜体、代码、列表、引用、链接、表格等 Markdown 元素
+ */
+
+.analysis-result-content .document-formatter {
+  width: 100%;
+}
+
+.analysis-result-content .formatted-content {
+  width: 100%;
+}
+
+/* 标题样式 */
+.analysis-result-content h1,
+.analysis-result-content h2,
+.analysis-result-content h3,
+.analysis-result-content h4 {
+  margin-top: var(--spacing-md);
+  margin-bottom: var(--spacing-sm);
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.4;
+}
+
+.analysis-result-content h1 {
+  font-size: var(--font-size-xl);
+  border-bottom: 2px solid var(--color-primary-500);
+  padding-bottom: var(--spacing-xs);
+}
+
+.analysis-result-content h2 {
+  font-size: var(--font-size-lg);
+  color: var(--color-primary-600);
+}
+
+.analysis-result-content h3 {
+  font-size: var(--font-size-md);
+}
+
+.analysis-result-content h4 {
+  font-size: var(--font-size-sm);
+}
+
+/* 段落样式 */
+.analysis-result-content p {
+  margin: var(--spacing-sm) 0;
+  font-size: var(--font-size-md);
+  color: var(--text-secondary);
+  line-height: var(--line-height-relaxed);
+}
+
+/* 粗体和斜体 */
+.analysis-result-content strong {
+  font-weight: 600;
+  color: var(--color-primary-600);
+}
+
+.analysis-result-content em {
+  font-style: italic;
+  color: var(--text-primary);
+}
+
+/* 代码样式 */
+.analysis-result-content code {
+  padding: 2px 6px;
+  background: var(--color-primary-100);
+  color: var(--color-primary-700);
+  border-radius: 4px;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 0.9em;
+}
+
+.analysis-result-content pre {
+  padding: var(--spacing-md);
+  background: var(--bg-tertiary);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  overflow-x: auto;
+  margin: var(--spacing-md) 0;
+}
+
+.analysis-result-content pre code {
+  background: transparent;
+  color: var(--text-primary);
+  padding: 0;
+}
+
+/* 列表样式 */
+.analysis-result-content ul,
+.analysis-result-content ol {
+  margin: var(--spacing-sm) 0;
+  padding-left: var(--spacing-lg);
+  color: var(--text-secondary);
+}
+
+.analysis-result-content li {
+  margin: var(--spacing-xs) 0;
+  line-height: var(--line-height-relaxed);
+}
+
+/* 引用块样式 */
+.analysis-result-content blockquote {
+  margin: var(--spacing-md) 0;
+  padding: var(--spacing-sm) var(--spacing-md);
+  background: var(--gradient-primary-subtle);
+  border-left: 4px solid var(--color-primary-500);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+/* 链接样式 */
+.analysis-result-content a {
+  color: var(--color-primary-500);
+  text-decoration: none;
+  border-bottom: 1px dashed var(--color-primary-500);
+  transition: all var(--transition-base);
+}
+
+.analysis-result-content a:hover {
+  color: var(--color-primary-600);
+  border-bottom-style: solid;
+}
+
+/* 表格样式 */
+.analysis-result-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: var(--spacing-md) 0;
+  background: var(--glass-bg);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+
+.analysis-result-content th,
+.analysis-result-content td {
+  padding: var(--spacing-sm) var(--spacing-md);
+  border: 1px solid var(--glass-border);
+  text-align: left;
+}
+
+.analysis-result-content th {
+  background: var(--gradient-primary-subtle);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.analysis-result-content tr:hover {
+  background: var(--color-primary-50);
+}
+
+/* 水平线样式 */
+.analysis-result-content hr {
+  border: none;
+  height: 2px;
+  background: var(--color-gradient);
+  margin: var(--spacing-lg) 0;
+  opacity: 0.5;
+}
+
+/* 高亮关键词样式 */
+.analysis-result-content mark.highlight {
+  background: var(--color-warning-200);
+  color: var(--text-primary);
+  padding: 2px 4px;
+  border-radius: 2px;
+  font-weight: 500;
+}
+
+/* 图片样式 */
+.analysis-result-content img {
+  max-width: 100%;
+  height: auto;
+  border-radius: var(--radius-md);
+  margin: var(--spacing-md) 0;
+}

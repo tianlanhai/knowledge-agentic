@@ -1,0 +1,50 @@
+# 上海宇羲伏天智能科技有限公司出品
+# 文件级注释：EditorConfig 配置
+# 内部逻辑：统一不同编辑器的代码风格
+
+root = true
+
+# 所有文件的默认配置
+[*]
+charset = utf-8
+indent_style = space
+indent_size = 2
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# Python 文件配置
+[*.py]
+indent_size = 4
+max_line_length = 100
+
+# JavaScript/TypeScript 文件配置
+[*.{js,jsx,ts,tsx}]
+indent_size = 2
+max_line_length = 100
+
+# JSON 文件配置
+[*.json]
+indent_size = 2
+
+# YAML 文件配置
+[*.{yml,yaml}]
+indent_size = 2
+
+# Markdown 文件配置
+[*.md]
+trim_trailing_whitespace = false
+max_line_length = off
+
+# Shell 脚本配置
+[*.{sh,bash}]
+indent_size = 2
+end_of_line = lf
+
+# CSS 文件配置
+[*.{css,scss,less}]
+indent_size = 2
+
+# HTML 文件配置
+[*.{html,htm}]
+indent_size = 2

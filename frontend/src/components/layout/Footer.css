@@ -1,0 +1,61 @@
+/**
+ * 上海宇羲伏天智能科技有限公司出品
+ * 文件级注释：页脚组件样式
+ */
+
+/* 属性：页脚容器样式 */
+.app-footer {
+  text-align: center;
+  padding: 16px 24px;
+  background: transparent;
+  border-top: 1px solid var(--color-border, rgba(0, 0, 0, 0.06));
+}
+
+/* 属性：页脚内容区域样式 */
+.footer-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  color: var(--color-text-secondary, rgba(0, 0, 0, 0.65));
+  font-size: 14px;
+}
+
+/* 属性：备案号链接样式 */
+.icp-link {
+  color: var(--color-text-secondary, rgba(0, 0, 0, 0.65));
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+/* 内部逻辑：备案号链接悬停效果 */
+.icp-link:hover {
+  color: var(--color-primary, #1677ff);
+}
+
+/* 属性：分隔符样式 */
+.footer-divider {
+  color: var(--color-border, rgba(0, 0, 0, 0.15));
+}
+
+/* 深色主题适配 */
+[data-theme='dark'] .app-footer {
+  border-top: 1px solid var(--color-border, rgba(255, 255, 255, 0.1));
+}
+
+[data-theme='dark'] .footer-content {
+  color: var(--color-text-secondary, rgba(255, 255, 255, 0.65));
+}
+
+[data-theme='dark'] .icp-link {
+  color: var(--color-text-secondary, rgba(255, 255, 255, 0.65));
+}
+
+/* 内部逻辑：深色主题下备案号链接悬停效果 */
+[data-theme='dark'] .icp-link:hover {
+  color: var(--color-primary, #4096ff);
+}
+
+[data-theme='dark'] .footer-divider {
+  color: var(--color-border, rgba(255, 255, 255, 0.15));
+}
